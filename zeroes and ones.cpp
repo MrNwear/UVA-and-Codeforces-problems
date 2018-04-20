@@ -20,7 +20,7 @@ while(s!="")
         }
     }
 
-    for(int r=1;r<=cas;r++){
+    for(int r=1;r<=n;r++){
     cout<<"Case "<<cas<<":"<<endl;
     for(int q=1;q<=n;q++)
         if(a[q]==0)
