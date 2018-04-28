@@ -1,32 +1,30 @@
-#include <iostream>
-#include <stdlib.h>
-#include <math.h>
-#include <bits/stdc++.h>
-
+#include<iostream>
 using namespace std;
-int main(){
-    int a,b,c,x,n;
-  pair<int,pair<int,int> > s[50000];
-  for(int i=0;i<50000;i++)
-    s[i].first=-1;
-  for(a=0;a<225;a++)
-    for(b=0;b<225;b++)
-        for(c=0;c<225;c++)
-        {
-            x=a*a+b*b+c*c;
-            if(x>50000)
-                continue;
-            s[x]={a,{b,c}};
-        }
-        cin>>n;
-        while(n--){
-            cin>>x;
-            if(s[x].first==-1)
-            {
-                cout<<-1<<endl;
-                continue;
+
+int main()
+{
+    int i,j,k,test,array[50000+1][3]={0},d;
+
+    for(i=0;i*i<=50000;i++)
+      for(j=i;i*i+j*j<=50000;j++)
+          for(k=j;i*i+j*j+k*k<=50000;k++)
+          {
+             d = i*i+j*j+k*k;
+             if(!array[d][0] && !array[d][1] && !array[d][2]){
+                array[d][0]=i;
+                array[d][1]=j;
+                array[d][2]=k;
             }
-            cout<<s[x].second.second<<" "<<s[x].second.first<<" "<<s[x].first<<endl;
-        }
+         }
+
+    cin>>test;
+    for(i=1;i<=test;i++)
+    {
+         cin>>d;
+         if( !array[d][0] && !array[d][1] && !array[d][2] )
+            cout<<-1<<endl;
+        else
+            cout<<array[d][0]<<‘ ‘<<array[d][1]<<‘ ‘<<array[d][2]<<endl;
+    }
     return 0;
 }
