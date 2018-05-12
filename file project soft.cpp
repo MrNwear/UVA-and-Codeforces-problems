@@ -1,31 +1,49 @@
 #include <bits/stdc++.h>
 typedef int ll;
 using namespace std;
-char id[10];
-char name[10];
-char amount[10];
-char type[10];
-char price[10];
-char shelfNumber[10];
+string id,name,amount,shelfNumber,type,price;
 class files{
  public : void insert(){
+
     fstream myfile;
+     bool flag=true;
+        while(flag){
+          cout<<"enter id ";
+    getline(cin,id);
+    string key;
+    flag=true;
+   myfile.open("test.txt",ios :: in);
+    while(!myfile.eof()){
+    getline(myfile,key,'|');
+    getline(myfile,name,'|');
+    getline(myfile,amount,'|');
+    getline(myfile,type,'|');
+    getline(myfile,price,'|');
+    getline(myfile,shelfNumber,'|');
+    if(id==key){
+    cout<<"this record is reserved"<<endl;
+    flag=false;
+    break;
+   }
+    }
+    myfile.close();
+    if(!flag)
+        flag=true;
+ }
     myfile.open("test.txt",ios :: out | ios::app);{
 
-        cout<<"enter id ";
-    cin.getline(id,10);
     cout<<"enter Name ";
-    cin.getline(name,10);
+    getline(cin,name);
     cout<<"enter amount ";
-    cin.getline(amount,10);
+    getline(cin,amount);
     cout<<"enter type ";
-    cin.getline(type,10);
+    getline(cin,type);
     cout<<"enter price ";
-    cin.getline(price,10);
+    getline(cin,price);
     cout<<"enter shelf number ";
-    cin.getline(shelfNumber,10);
+    getline(cin,shelfNumber);
 
-    myfile<<id<<'|'<<name<<'|'<<type<<'|'<<price<<'|'<<shelfNumber<<endl;
+    myfile<<id<<'|'<<name<<'|'<<amount<<'|'<<type<<'|'<<price<<'|'<<shelfNumber<<'|';
     }
 myfile.close();
 }
@@ -39,8 +57,8 @@ public : void read() {
     getline(myfile,amount,'|');
     getline(myfile,type,'|');
     getline(myfile,price,'|');
-    getline(myfile,shelfNumber);
-    if(id!="")
+    getline(myfile,shelfNumber,'|');
+    if(id!="" && id[0]!='0')
     cout<<id<<" "<<name<<" "<<amount<<" "<<type<<" "<<price<<" "<<shelfNumber<<endl;
     }
     myfile.close();
@@ -59,7 +77,7 @@ public : void search() {
     getline(myfile,amount,'|');
     getline(myfile,type,'|');
     getline(myfile,price,'|');
-    getline(myfile,shelfNumber);
+    getline(myfile,shelfNumber,'|');
     if(id==key){
     cout<<"found"<<endl;
     flag=false;
@@ -84,7 +102,7 @@ void update(){
     getline(myfile,amount,'|');
     getline(myfile,type,'|');
     getline(myfile,price,'|');
-    getline(myfile,shelfNumber);
+    getline(myfile,shelfNumber,'|');
 
     if(id==key){
        cout<<"enter id ";
@@ -101,7 +119,7 @@ void update(){
     cout<<"enter shelf number ";
     getline(cin,shelfNumber);
 
-      myfile<<id<<'|'<<name<<'|'<<type<<'|'<<price<<'|'<<shelfNumber<<endl;
+      myfile<<id<<'|'<<name<<'|'<<type<<'|'<<price<<'|'<<shelfNumber<<'|'<<endl;
     }
     else if(id!="");
     }
@@ -118,7 +136,7 @@ void del(){
     bool flag=false;
     cout<<"enter the id"<<endl;
     cin>>key;
-    string id,name,age;
+    string id,name,amount,type,price,shelfNumber;
     fstream temp;
     temp.open("temp.txt",ios ::out);
     myfile.open("test.txt",ios :: in | ios ::out );
@@ -126,9 +144,12 @@ void del(){
             int x=myfile.tellg();
     getline(myfile,id,'|');
     getline(myfile,name,'|');
-    getline(myfile,age);
-    if(id==key){
-            if(x!=0)x--;
+    getline(myfile,amount,'|');
+    getline(myfile,type,'|');
+    getline(myfile,price,'|');
+    getline(myfile,shelfNumber,'|');
+if(id==key){
+            //if(x!=0)x--;
             myfile.seekg(x);
             cout<<"record is deleted"<<endl;
             myfile<<"0";
