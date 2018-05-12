@@ -137,8 +137,6 @@ void del(){
     cout<<"enter the id"<<endl;
     cin>>key;
     string id,name,amount,type,price,shelfNumber;
-    fstream temp;
-    temp.open("temp.txt",ios ::out);
     myfile.open("test.txt",ios :: in | ios ::out );
     while(!myfile.eof()){
             int x=myfile.tellg();
@@ -161,10 +159,7 @@ if(id==key){
     if(!flag)
         cout<<"record not found "<<endl;
     myfile.close();
-    /*
-    remove("test.txt");
-    rename("temp.txt","test.txt");
-*/
+    
 }
 };
 int main()
