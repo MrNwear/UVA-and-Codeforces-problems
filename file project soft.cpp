@@ -27,7 +27,9 @@ class files{
    }
     }
     myfile.close();
-    if(!flag)
+    if(flag)
+        break;
+    else
         flag=true;
  }
     myfile.open("test.txt",ios :: out | ios::app);{
@@ -67,6 +69,7 @@ public : void read() {
 public : void search() {
     ifstream myfile;
     string key;
+    cout<<"enter the id ";
     cin>>key;
     bool flag=true;
     string id,name,shelfNumber,amount,type,price;
@@ -93,10 +96,9 @@ void update(){
     cout<<"enter the id"<<endl;
     cin>>key;
     string id,name,type,shelfNumber,price,amount;
-    fstream temp;
-    temp.open("temp.txt",ios ::out);
     myfile.open("test.txt",ios :: in | ios ::out);
     while(!myfile.eof()){
+            int x=myfile.tellg();
     getline(myfile,id,'|');
     getline(myfile,name,'|');
     getline(myfile,amount,'|');
@@ -105,29 +107,15 @@ void update(){
     getline(myfile,shelfNumber,'|');
 
     if(id==key){
-       cout<<"enter id ";
-    cin>>id;
+            myfile.seekg(x);
+    myfile<<"0";
     cin.ignore();
-    cout<<"enter Name ";
-    getline(cin,name);
-     cout<<"enter amount ";
-    getline(cin,amount);
-    cout<<"enter type ";
-    getline(cin,type);
-    cout<<"enter price ";
-    getline(cin,price);
-    cout<<"enter shelf number ";
-    getline(cin,shelfNumber);
-
-      myfile<<id<<'|'<<name<<'|'<<type<<'|'<<price<<'|'<<shelfNumber<<'|'<<endl;
+     insert();
+     break;
     }
     else if(id!="");
     }
     myfile.close();
-    temp.close();/*
-    remove("test.txt");
-    rename("temp.txt","test.txt");*/
-
 }
 void del(){
 
@@ -137,6 +125,8 @@ void del(){
     cout<<"enter the id"<<endl;
     cin>>key;
     string id,name,amount,type,price,shelfNumber;
+    fstream temp;
+    temp.open("temp.txt",ios ::out);
     myfile.open("test.txt",ios :: in | ios ::out );
     while(!myfile.eof()){
             int x=myfile.tellg();
@@ -159,7 +149,10 @@ if(id==key){
     if(!flag)
         cout<<"record not found "<<endl;
     myfile.close();
-    
+    /*
+    remove("test.txt");
+    rename("temp.txt","test.txt");
+*/
 }
 };
 int main()
