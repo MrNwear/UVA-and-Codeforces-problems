@@ -13,7 +13,7 @@ class files{
     string key;
     flag=true;
    myfile.open("test.txt",ios :: in);
-    while(!myfile.eof()){
+    while(!myfile.eof() && myfile.is_open()){
     getline(myfile,key,'|');
     getline(myfile,name,'|');
     getline(myfile,amount,'|');
@@ -21,7 +21,7 @@ class files{
     getline(myfile,price,'|');
     getline(myfile,shelfNumber,'|');
     if(id==key){
-    cout<<"this record is reserved"<<endl;
+    cout<<"this record is reserved"<<endl<<endl;
     flag=false;
     break;
    }
@@ -87,7 +87,7 @@ public : void search() {
     break;
    }
     }
-    if(flag) cout<<"Not found "<<endl;
+    if(flag) cout<<"Not found "<<endl<<endl;
     myfile.close();
 }
 void update(){
@@ -110,6 +110,7 @@ void update(){
             myfile.seekg(x);
     myfile<<"0";
     cin.ignore();
+    myfile.close();
      insert();
      break;
     }
@@ -139,7 +140,7 @@ void del(){
 if(id==key){
             //if(x!=0)x--;
             myfile.seekg(x);
-            cout<<"record is deleted"<<endl;
+            cout<<"record is deleted"<<endl<<endl;
             myfile<<"0";
             flag=true;
             break;
@@ -147,7 +148,7 @@ if(id==key){
     else if(id!="");
     }
     if(!flag)
-        cout<<"record not found "<<endl;
+        cout<<"record not found "<<endl<<endl;
     myfile.close();
     /*
     remove("test.txt");
